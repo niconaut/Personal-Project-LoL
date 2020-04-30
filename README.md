@@ -1,5 +1,5 @@
 
-# Personal Project: Riot Games
+# Personal Project: League of Legends
 
 ## Nicolaas Van Steenbergen
 

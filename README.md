@@ -15,7 +15,7 @@ Needing data to analyze, I specifically played during a special game mode called
 
 ### **Understanding the API and Making Calls**
 
-Having experience with Spotify and Google Map’s API, I was already accustomed to using APIs to retrieve data. Riot’s developer portal was a huge help in knowing what data is accessible, because I could make calls and view data in the same browser window. I found which calls would access my match history and added filters to return only the “URF” matches.
+Having experience with Spotify and Google Map’s API, I was already accustomed to using APIs to retrieve data. Riot’s developer portal was a huge help in knowing what data is accessible, because I could make calls and view data in the same browser window. I found which calls would access my match history and added filters to return the “URF” matches.
 
 The first step was to get my Riot-side profile information so I could use their id system when calling my match history. Using my in-game name and region, I obtained all account information necessary for further calls. Shortly after, I was able to grab all match information available and store it as JSON objects.
 
@@ -25,7 +25,7 @@ The first step was to get my Riot-side profile information so I could use their 
 
 ### **Understanding the data**
 
-Armed with data, I began the long process of, well, processing. Understanding the best way to access all the data in the JSON files took some time but was eventually condensed into a handful of short functions. For all functions see [end and link doc?]
+Armed with data, I began the long process of, well, processing. Understanding the best way to extract all the data in the JSON files took some time, but was eventually condensed into a handful of short [functions.](https://github.com/niconaut/Personal-Project-LoL/blob/master/custom_functions.py)
 
 <br/>
 
@@ -37,13 +37,13 @@ Once the data was in a dataframe format, I connected Python to SQL using psycopg
 
 ### **Finding interesting insights**
 
-First, let us just do some rapid-fire insights:
+First, let us do some rapid-fire insights:
 
 - Winning teams dealt on average ~14% more damage
 - Winning teams kill-to-death ratio was **double** the losing teams
-- Average game time was 18 minutes, with the longest game of 28 minutes and shortest at just 8 minutes
-- 58% of the time, the team with the first kill of the match wins
-- 67% of the time, the team that destroyed the first tower of the match wins. This is a better predictor of winning, due to it happening later in the game
+- Average game time was 18 minutes, with the longest game of 28 minutes and shortest of just 8 minutes
+- 58% of the time, the team with the first kill wins the game
+- 67% of the time, the team that destroyed the first tower wins the game. This is a better predictor of winning, due to it happening later in the game
 - Winning teams earned more gold per minute which helps them buy items and get stronger more quickly
 - Top 5 most winning characters:
     - Morgana – 21 wins
@@ -57,7 +57,7 @@ First, let us just do some rapid-fire insights:
 
 One of the most interesting insights was the impact of ward placement in the game. A *ward* is a totem that can be placed anywhere on the map and reveals enemies that move near it. Wards are a strong mechanic in the game because knowing the location of the opposing team can help you make informed decisions.
 
-While looking at the total wards placed by the winning team vs. the losing team, I was surprised to find no noticeable difference. How could this important mechanic have no effect on the game’s outcome? Investigating further, I dove into *vision score*, which measures the effectiveness of the wards placed. For example, if a ward is placed but does not reveals anything, it gives 0 vision score; where a ward that reveals 5 enemies, gives 5 vision score. Comparing the vision scores of the winning and losing teams I discovered that 71% of the time, the winning team had a higher score. This shows it’s not the amount of wards placed that wins games, rather the effectiveness of the ward.
+While looking at the total wards placed by the winning team vs. the losing team, I was surprised to find no noticeable difference. How could this important mechanic have no effect on the game’s outcome? Investigating further, I dove into *vision score*, which measures the effectiveness of the wards placed. For example, if a ward is placed but does not reveals anything, it gives 0 vision score; where a ward that reveals 5 enemies, gives 5 vision score. Comparing the vision scores of the winning and losing teams, I discovered that 71% of the time, the winning team had a higher score. This shows it’s not the amount of wards placed that wins games, rather the effectiveness of the ward.
 
 ```SQL
 WITH vs_CTE ("gameId_CTE","visionScore_CTE","teamId_CTE","win_CTE") AS (
@@ -93,7 +93,7 @@ The final and least impactful indicator is the “Damage Taken” differential. 
 
 #### Damage Taken vs. Damage Dealt
 
-Lastly, I wanted to look at my own playing abilities and see how I performed each game. I chose to look into  "Damage I dealt (blue)" vs "Damage I took (red)", and my results were…less than satisfactory. As seen in the graphic below I almost always took more damage than I dealt. Luckily, that appears to have little effect on the outcome of the game. This reinforces the idea that damage does not determine the outcome. A possible explanation to this outcome is I tend to play characters that are meant to protect my teammates, so my goal is to take the damage directed at them. Therefore, despite my poor ratio, we can still win the game.
+Lastly, I wanted to look at my own playing abilities and see how I performed each game. I chose to look into  "Damage I dealt (blue)" vs "Damage I took (red)", and my results were…less than satisfactory. As seen in the graphic below I almost always took more damage than I dealt. Luckily, that appears to have little effect on if I won the game. This reinforces the idea that using damage as a predictor of the outcome is inconsistent. A possible explanation to this outcome, is I tend to play characters that are meant to protect my teammates, so my goal is to take the damage directed at them. Therefore, despite my poor ratio, we can still win the game.
 
 <img src="images/damage_taken_vs_dealt.png" alt="dmgVtaken" width="100%" height="100%"/>
 

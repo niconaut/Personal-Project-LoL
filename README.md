@@ -51,7 +51,7 @@ First, let us just do some rapid-fire insights:
     - Ezreal – 17 wins
     - Darius – 15 wins
     - Teemo – 14 wins
-    - 63% of the time, the winning team distributed more “CC”, or “crowd control”, which negatively affects enemy movement. This high win percentage makes sense, since if the enemy is not moving then they are a lot easier to take down.
+- 63% of the time, the winning team distributed more “CC”, or “crowd control”, which negatively affects enemy movement. This high win percentage makes sense, since if the enemy is not moving then they are a lot easier to take down.
 
 #### Vision In*sights*
 

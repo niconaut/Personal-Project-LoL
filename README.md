@@ -7,7 +7,7 @@
 
 ### **Intro**
 
-I have been playing League of Legends (LoL), semi-consistently since 2010 and now use it as a way to keep in touch with friends who live across the country. Upon learning about the LoL API, I thought it would be fun to analyze my own games and see if I can come up with any interesting insights.
+I have been playing [League of Legends](https://en.wikipedia.org/wiki/League_of_Legends) (LoL), semi-consistently since 2010 and now use it as a way to keep in touch with friends who live across the country. Upon learning about the LoL API, I thought it would be fun to analyze my own games and see if I can come up with any interesting insights.
 
 Needing data to analyze, I specifically played during a special game mode called *URF*. *URF*, or "*Ultra Rapid Fire*" is a fast-paced version of the regular game. This mode quickly provided the 100-game pool I wanted for analysis.
 
@@ -17,14 +17,11 @@ Needing data to analyze, I specifically played during a special game mode called
 
 Having experience with Spotify and Google Map’s API, I was already accustomed to using APIs to retrieve data. Riot’s developer portal was a huge help in knowing what data is accessible, because I could make calls and view data in the same browser window. I found which calls would access my match history and added filters to return only the “URF” matches.
 
-The first step was to get my Riot-side profile information so I could use their id system when calling my match history. Using my in-game name and region, I obtained all account information necessary for further calls.
+The first step was to get my Riot-side profile information so I could use their id system when calling my match history. Using my in-game name and region, I obtained all account information necessary for further calls. Shortly after, I was able to grab all match information available and store it as JSON objects.
 
-<img src="images/first_call.JPG" alt="firstCall" width="70%" height="70%"/>
-*For all other calls go to [github link to calls].
+<img src="images/first_call.JPG" alt="firstCall" width="100%" height="100%"/>
 
-Shortly after, I was able to grab all match information available and store it as JSON objects.
-
-<br/>
+*[all calls](https://github.com/niconaut/Personal-Project-LoL/blob/master/info_gathering.py)
 
 ### **Understanding the data**
 
@@ -80,25 +77,25 @@ WHERE one."visionScore_CTE" > two."visionScore_CTE" AND one."win_CTE" = 'true'
 
 Where kills happen on the map is a great way to visualize important areas. Using the game map as a background, I plotted all kills from the 100 games to get a heatmap. As seen in the heatmap, the top, middle, and bottom are where most of the action happens. The area between the middle and bottom is also very important. This is due to a special objective in this area, that when captured, gives the capturing team a large, permanent strength increase. Most of the games revolved around this objective and its importance is reflected in the map.
 
-<img src="images/heatmap.png" alt="heatmap" width="70%" height="70%"/>
+<img src="images/heatmap.png" alt="heatmap" width="50%" height="50%"/>
 
 #### 10 minute Deltas
 
 With games lasting roughly 18 minutes, looking at the difference between the two teams at 10 minutes helps us understand important contributing factors to winning.
 
-<img src="images/delats.png" alt="deltas" width="70%" height="70%"/>
+<img src="images/deltas.png" alt="deltas" width="100%" height="100%"/>
 
 From the graphic above we can see that the “Team Experience difference” is the most impactful variable. This is because the more experience you have, the faster you level up in game. More experience unlocks stronger skills to use against the opposing team. This advantage eventually adds upon itself, creating a bigger and bigger lead.
 
 The “MS difference”, or “Minion Score”, is also a good indicator on who will win the match. Minions are creatures that give gold and experience to the team who slays them. The “MS” and “Team Experience” differences are intrinsically correlated, since the only ways to gain experience is by slaying minions or other players. Since 36 minions spawn each minute, they are the premier way to gain experience.
 
-The final and least impactful indicator is the “Damage Taken” differential. While it the losing team takes more damage on average, it does not appear that the winning team has a distinguishable trend.
+The final and least impactful indicator is the “Damage Taken” differential. While the losing team takes more damage on average, the winning team's damage taken varies, making it harder to say if damage taken is a good indicator of future victory.
 
 #### Damage Taken vs. Damage Dealt
 
-Lastly, I wanted to look at my own playing abilities and see how I performed each game. I chose to look into the damage I dealt (*blue*) vs the damage I took (*red*), and my results were…less than satisfactory. As seen in the graphic below I almost always took more damage than I dealt. Luckily, that appears to have little effect on the outcome of the game. This reinforces the idea that damage does not determine the outcome. A possible explanation to this outcome is I tend to play characters that are meant to protect my teammates, so my goal is to take the damage directed at them. Therefore, despite my poor ratio, we can still win the game.
+Lastly, I wanted to look at my own playing abilities and see how I performed each game. I chose to look into  "Damage I dealt (blue)" vs "Damage I took (red)", and my results were…less than satisfactory. As seen in the graphic below I almost always took more damage than I dealt. Luckily, that appears to have little effect on the outcome of the game. This reinforces the idea that damage does not determine the outcome. A possible explanation to this outcome is I tend to play characters that are meant to protect my teammates, so my goal is to take the damage directed at them. Therefore, despite my poor ratio, we can still win the game.
 
-<img src="images/damage_taken_vs_dealt.png" alt="dmgVtaken" width="70%" height="70%"/>
+<img src="images/damage_taken_vs_dealt.png" alt="dmgVtaken" width="100%" height="100%"/>
 
 <br/>
 
